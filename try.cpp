@@ -22,7 +22,7 @@ int main(int argc, char *argv[]) {
 	size_t file_size = 0;
 	
 	while (fread((network_buffer) + 4*(i-1) + file_size ,1,1,fp) == 1) {
-		file_size ++;}
+		file_size ++;} // I will not implement fread checking. Implemented in version 2.
 
 	if(file_size<4) {printf("File%d is smaller than 4byte", i); return 1;}
 	if(file_size>4) {printf("File%d is bigger than 4byte", i); return 1;}
@@ -40,7 +40,7 @@ int main(int argc, char *argv[]) {
 	
 	uint32_t *test = (uint32_t *)network_buffer;
 	for(int i = 0; i < (argc -1); i++){
-		printf("%d\n", ntohl(*(test+i)));}
+		printf("%u\n", ntohl(*(test+i)));}
 
 	return 0;
 	}
@@ -48,16 +48,20 @@ int main(int argc, char *argv[]) {
 	
 
 	/*version2
-	fseek(fp, 0, SEEK_END);
-	long file_size = ftell(fp);
-	rewind(fp);   
+	if(fseek(filepointer, 0, SEEK_END) != 0) {printf("File%d seeking error", i); fclose(fp); return 0;}
 
-	if(file_size<4) {printf("File%d is smaller than 4byte", i); return 1;}
-        if(file_size>4) {printf("File%d is bigger than 4byte", i); return 1;}
+	long file_size = ftell(filepointer);
+	if(long file_size == -1) {printf("File%d telling error", i); fclose(fp); return 0;}
+
+        rewind(filepointer);
+
+
+	if(file_size<4) {printf("File%d is smaller than 4byte", i); flose(fp);  return 1;}
+        if(file_size>4) {printf("File%d is bigger than 4byte", i); fclose(fp); return 1;}
 	
-	fread(numbers + i, 4, 1, fp);
-	printf("before ntohl: %d(0x%08x)\n", numbers[i],numbers[i]);
-	printf("after ntohl: %d(0x%08x)\n", ntohl(numbers[i]), ntohl(numbers[i]));
+	if(fread(numbers + i, 4, 1, fp) != 1) {printf("File%d reading failed", i); fclose(fp); return 1;}
+	printf("before ntohl: %u(0x%08x)\n", numbers[i],numbers[i]);
+	printf("after ntohl: %u(0x%08x)\n", ntohl(numbers[i]), ntohl(numbers[i]));
 	fclose(fp); }
 
 	return 0; } */
