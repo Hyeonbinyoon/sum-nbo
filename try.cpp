@@ -19,42 +19,46 @@ int main(int argc, char *argv[]) {
 			return 1;
 		}
 
-	/*version1
+	//version1
 	size_t file_size = 0;
 	
 	while (fread((network_buffer) + 4*(i-1) + file_size ,1,1,fp) == 1) {
 		file_size ++;}
 
-	if(file_size<4) {printf("File is smaller than 4byte"); return 1;}
-	if(file_size>4) {printf("File is bigger than 4byte"); return 1;}
+	if(file_size<4) {printf("File%d is smaller than 4byte", i); return 1;}
+	if(file_size>4) {printf("File%d is bigger than 4byte", i); return 1;}
 	
 	fclose(fp);
 	}
 
+	
 
 	for(int i = 0; i< 4 * (argc - 1); i++) {
 		printf("%02x" , network_buffer[i]);
 		if(i%4 == 3) printf("\n");
 	}
 
+	
+	uint32_t *test = (uint32_t *)network_buffer;
+	for(int i = 0; i < (argc -1); i++){
+		printf("%d\n", ntohl(*(test+i)));}
+
 	return 0;
-	} */
+	}
 
 	
 
-	//version2
+	/*version2
 	fseek(fp, 0, SEEK_END);
 	long file_size = ftell(fp);
 	rewind(fp);   
 
-	if(file_size<4) {printf("File is smaller than 4byte"); return 1;}
-        if(file_size>4) {printf("File is bigger than 4byte"); return 1;}
+	if(file_size<4) {printf("File%d is smaller than 4byte", i); return 1;}
+        if(file_size>4) {printf("File%d is bigger than 4byte", i); return 1;}
 	
 	fread(numbers + i, 4, 1, fp);
-	printf("before ntohs: %d(0x%08x)\n", numbers[i],numbers[i]);
-	printf("after ntohs: %d(0x%08x)\n", ntohl(numbers[i]), ntohl(numbers[i]));
+	printf("before ntohl: %d(0x%08x)\n", numbers[i],numbers[i]);
+	printf("after ntohl: %d(0x%08x)\n", ntohl(numbers[i]), ntohl(numbers[i]));
 	fclose(fp); }
 
-	return 0; }
-
-
+	return 0; } */
