@@ -51,7 +51,7 @@ int main(int argc, char *argv[]) {
 	if(fseek(filepointer, 0, SEEK_END) != 0) {printf("File%d seeking error", i); fclose(fp); return 0;}
 
 	long file_size = ftell(filepointer);
-	if(long file_size == -1) {printf("File%d telling error", i); fclose(fp); return 0;}
+	if(file_size == -1) {printf("File%d telling error", i); fclose(fp); return 0;}
 
         rewind(filepointer);
 
