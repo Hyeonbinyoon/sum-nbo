@@ -5,14 +5,14 @@
 int main(int argc, char*argv[]){
 	uint32_t numbers[100];
 	uint32_t result = 0;
-	if(argc > 101) {printf("The maximum number of files that can be inserted is 100."); return 1;}
-        if (argc < 2) {printf("File not found"); return 1;}
+	if(argc > 101) {printf("The maximum number of files that can be inserted is 100.\n"); return 1;}
+        if (argc < 2) {printf("File not found\n"); return 1;}
 
 	for (int i = 1; i <argc; i++){
                 FILE *fp = fopen(argv[i], "rb");
 
                 if (fp == NULL) {
-                        printf("fopen (no.%d file): No such file or directoy",i);
+                        printf("fopen (no.%d file): No such file or directoy\n",i);
                         return 1;
                 }
 
