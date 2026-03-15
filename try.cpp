@@ -6,10 +6,9 @@
 int main(int argc, char *argv[]) {
 	uint32_t numbers[10];
 	uint8_t network_buffer[40];
-	if (argc < 2) {
-		printf("File not found");
-		return 1;
-	}
+
+	if(argc > 11) {printf("The maximum number of files that can be inserted is 10."); return 1;}
+	if (argc < 2) {printf("File not found"); return 1;}
 	
 	for (int i = 1; i <argc; i++){
 		FILE *fp = fopen(argv[i], "rb");
