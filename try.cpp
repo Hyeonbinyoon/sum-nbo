@@ -24,8 +24,8 @@ int main(int argc, char *argv[]) {
 	while (fread((network_buffer) + 4*(i-1) + file_size ,1,1,fp) == 1) {
 		file_size ++;} // I will not implement fread checking. Implemented in version 2.
 
-	if(file_size<4) {printf("File%d is smaller than 4byte", i); return 1;}
-	if(file_size>4) {printf("File%d is bigger than 4byte", i); return 1;}
+	if(file_size<4) {printf("File%d is smaller than 4byte", i); fclose(fp); return 1;}
+	if(file_size>4) {printf("File%d is bigger than 4byte", i); fclose(fp); return 1;}
 	
 	fclose(fp);
 	}
@@ -56,7 +56,7 @@ int main(int argc, char *argv[]) {
         rewind(filepointer);
 
 
-	if(file_size<4) {printf("File%d is smaller than 4byte", i); flose(fp);  return 1;}
+	if(file_size<4) {printf("File%d is smaller than 4byte", i); fclose(fp);  return 1;}
         if(file_size>4) {printf("File%d is bigger than 4byte", i); fclose(fp); return 1;}
 	
 	if(fread(numbers + i, 4, 1, fp) != 1) {printf("File%d reading failed", i); fclose(fp); return 1;}
